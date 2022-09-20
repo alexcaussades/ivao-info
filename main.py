@@ -2,8 +2,12 @@ import re
 import requests
 import json
 import datetime
+from module.version import version
+from module.ia.position import position_atc
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
+
+version()
 
 ivaosr = input("qu'elle est votre recherche ? ")
 
@@ -14,14 +18,7 @@ atc = r.json()
 
 x = atc["clients"]["atcs"]
 
-position_atc = {
-  "APP": "_APP",
-  "TWR": "_TWR",
-  "GND": "_GND",
-  "DEL": "_DEL",
-  "AFIS": "_AFIS",
-  "CTR": "_CTR"
-}
+
 
 print("{0} positions ATC ouverte, sur IVAO !".format(len(x)))
 print("")
