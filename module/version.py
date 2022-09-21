@@ -1,3 +1,3 @@
 def version():
-    number = "0.0.1"
+    number = "0.0.2"
     print("Version: Alpha {0}".format(number))
