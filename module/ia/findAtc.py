@@ -2,11 +2,12 @@ import fnmatch
 import re
 
 def srAtc(ivao, x):
-    d = ivao.split("*")
+    addJocker = ivao + "*"
+    d = addJocker.split("*")
     for a in range(0, len(x)):
         icaoList = [x[a]["callsign"]]
         for b in range(0, len(icaoList)):
-            filtered = fnmatch.filter(icaoList, ivao)
+            filtered = fnmatch.filter(icaoList, addJocker)
             filteredd = list(filter(None, filtered))
             for r in filteredd:
                 if not r:
