@@ -3,6 +3,7 @@ import requests
 import json
 import time
 import asyncio
+import fnmatch
 from datetime import datetime
 from module.version import version
 from module.ia.position import position_atc
@@ -26,8 +27,8 @@ print("{0} positions ATC ouverte, sur IVAO !".format(len(x)))
 print("{0} Pilots en ligne, sur IVAO !".format(len(p)))
 print("")
 
-engine.say("Sac à merde. Je sais que tu te tapes ma femme. Je ne vais donc pas prévoir de catégorie Mathématiques à mes récompenses. Signé : Monsieur Nobel.")
-engine.runAndWait()
+# engine.say("Bonsoir maxime je suis ton inteligence artificiel personelle pour IVAO. Que veux tu faire ? ")
+# engine.runAndWait()
 
 try:
   
@@ -47,6 +48,9 @@ try:
   
   
   position_gen(ivaoupper, x)
+  
+
 
 except(KeyboardInterrupt):
+  
    print(" Fermeture du logiciel")
