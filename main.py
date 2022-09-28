@@ -10,7 +10,10 @@ from module.ia.position import position_atc
 from module.atc.atc import position_gen
 from module.pilote.pilote import pilote_arriver
 from module.ia.time import timestamp_atc
+from module.ia.findAtc import srAtc
+from module.help import help
 import pyttsx3
+
 engine = pyttsx3.init()
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
@@ -32,8 +35,12 @@ print("")
 
 try:
   
-  ivaosr = input("qu'elle est votre recherche ? ")
+  ivaosr = input("Qu'elle est votre recherche ? ")
   ivaoupper = ivaosr.upper()
+
+  if(ivaosr == "-h"):
+      help()
+
   try:
     args = ivaosr.split()
     ivaoupperArgs = ivaoupper.split()
@@ -41,6 +48,10 @@ try:
     if(ivaoupper and args[1]):
       if(args[1] == "-a"):
         pilote_arriver(ivaoupperArgs[0], p)
+      
+      if(args[1] == "-f"):
+        if(len(ivaoupperArgs[0]) <= 3):
+          srAtc(ivaoupperArgs[0], x)
 
   except:
     tt = 'Vous pouvez pour utiliser des arguments taper "-h" pour en savoir plus !'
