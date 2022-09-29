@@ -28,7 +28,11 @@ def get_dossier():
         return True
     else:
         os.makedirs(pathData(), mode=0o777)
-        
+
+def opendocs():
+    os.system("start "+ os.path.join(path, "AppData", "Roaming", docs))
+
+opendocs()
 
 # get_dossier()
 # dic = {"vid": 191514, "name": "Caussades", "lasname": "Alexandre"}
