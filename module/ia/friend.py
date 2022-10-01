@@ -3,6 +3,8 @@ import os
 import logging
 import socket
 import json
+import re
+import asyncio
 from pathlib import Path
 
 
@@ -32,14 +34,7 @@ def get_dossier():
 def opendocs():
     os.system("start "+ os.path.join(path, "AppData", "Roaming", docs))
 
-opendocs()
 
-# get_dossier()
-# dic = {"vid": 191514, "name": "Caussades", "lasname": "Alexandre"}
-# creatfile = json.dumps(dic, indent=4)
-# localfile = open(pathData()+"/"+ str(dic["vid"])+".json", "w")
-# localfile.write(creatfile)
-# localfile.close()
 
 class add_friends():
 
@@ -67,6 +62,33 @@ class add_friends():
         except IOError:
             print("Add friends is bad ")
 
+
+class verify_friends():
+
+    def __init__(self, vid):
+        self.vid = vid
+    
+    def creat_dic_verify_friends(self):
+        dic_friends = []
+        arr = os.listdir(pathData())
+        i = 0 
+        while i <= len(arr):
+            for r in range(0, len(arr)):
+                txt = arr[r].split(".")
+                dic_friends.append(txt[0])
+            i = i +1
+            break
+        return dic_friends
+    
+    def verify_friends(self):
+        if self.vid in self.creat_dic_verify_friends():
+            print("je suis present !")
+        else:
+            print("je ne suis pas la !")
+
 # p1 = add_friends(191520, "thyrerryy", "qskdkqizdjq")
 # print(p1.creatjson())
 
+
+test = verify_friends("191535")
+print(test.verify_friends())
