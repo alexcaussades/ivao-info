@@ -15,15 +15,7 @@ path = Path.home()
 def pathData():
     return os.path.join(path, "AppData", "Roaming", docs, dossier_data)
 
-def fiends_pilote(vid, p):
-    for a in range(0, len(p)):
-        if(p[a]["userId"] == vid):
-            print("Callsign: " + p[a]["callsign"])
 
-def fiends_atc(vid, x):
-    for a in range(0, len(x)):
-        if(x[a]["userId"] == vid):
-            print("Callsign: " + x[a]["callsign"])
 
 def get_dossier():
     if os.path.exists(pathData()):
@@ -33,6 +25,7 @@ def get_dossier():
 
 def opendocs():
     os.system("start "+ os.path.join(path, "AppData", "Roaming", docs))
+
 
 
 
@@ -61,11 +54,12 @@ class add_friends():
 
         except IOError:
             print("Add friends is bad ")
+        
 
 
 class verify_friends():
 
-    def __init__(self, vid):
+    def __init__(self, vid=None):
         self.vid = vid
     
     def creat_dic_verify_friends(self):
@@ -80,15 +74,17 @@ class verify_friends():
             break
         return dic_friends
     
-    def verify_friends(self):
-        if self.vid in self.creat_dic_verify_friends():
+    def verify_friends(vid):
+        if vid in self.creat_dic_verify_friends():
             print("je suis present !")
-        else:
-            print("je ne suis pas la !")
+        
 
-# p1 = add_friends(191520, "thyrerryy", "qskdkqizdjq")
-# print(p1.creatjson())
+def fiends_pilote(vid, p):
+    for a in range(0, len(p)):
+        if(p[a]["userId"] == vid):
+            print("Callsign: " + p[a]["callsign"])
 
-
-test = verify_friends("191535")
-print(test.verify_friends())
+def fiends_atc(vid):
+    x = verify_friends()
+    x.verify_friends(str(vid))
+    
