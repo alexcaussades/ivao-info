@@ -1,7 +1,9 @@
+#!/usr/bin/python3
 import re
 import requests
 import json
 import time
+import os
 import asyncio
 import fnmatch
 from datetime import datetime
@@ -13,8 +15,11 @@ from module.ia.time import timestamp_atc
 from module.ia.findAtc import srAtc
 from module.help import help
 from module.ia.friend import add_friends as addFriends
-from module.ia.friend import fiends_atc
+from module.ia.friend import creat_dic_verify_friends
+from module.ia.pilote_list import pilote_list
+from module.ia.atc_list import atc_list
 import pyttsx3
+from pathlib import Path
 
 engine = pyttsx3.init()
 
@@ -37,6 +42,25 @@ print("")
 #engine.say("Bonsoir maxime je suis ton inteligence artificiel personelle pour IVAO. Que veux tu faire ? ")
 #engine.runAndWait()
 
+docs = "info-ivao"
+dossier_data = "friends"
+path = Path.home()
+
+def pathData():
+    return os.path.join(path, "AppData", "Roaming", docs, dossier_data)
+
+def creat_dic_verify_friends():
+    dic_friends = []
+    arr = os.listdir(pathData())
+    i = 0 
+    while i <= len(arr):
+        for r in range(0, len(arr)):
+            txt = arr[r].split(".")
+            dic_friends.append(int(txt[0]))
+            i = i +1
+        break
+    return dic_friends
+
 try:
   
   ivaosr = input("Qu'elle est votre recherche ? ")
@@ -53,24 +77,17 @@ try:
     add.creatjson()
 
   if(ivaosr == "online"):
-    list_ivao_atc = []
-    i = 0
-    while i <= len(x):
-      for r in range(0, len(x)):
-        list_ivao_atc.append(x[r]["userId"])
-        i = i +1
-      break
-    print(list_ivao_atc)
+    list_ivao_atc = atc_list(x)
+    list_ivao_pilot = pilote_list(p)
+    list_pc = creat_dic_verify_friends()
+    list_gen = list_ivao_atc + list_ivao_pilot
 
-    list_ivao_pilot = []
-    i = 0
-    while i <= len(x):
-      for r in range(0, len(p)):
-        list_ivao_pilot.append(p[r]["userId"])
-        i = i +1
-      break
-    print(list_ivao_pilot)
-
+    for i in list_gen:
+      for j in list_pc:
+          if(i==j):
+              print(i)
+              break
+    
 
 
   try:

@@ -57,34 +57,15 @@ class add_friends():
         
 
 
-class verify_friends():
-
-    def __init__(self, vid=None):
-        self.vid = vid
-    
-    def creat_dic_verify_friends(self):
-        dic_friends = []
-        arr = os.listdir(pathData())
-        i = 0 
-        while i <= len(arr):
-            for r in range(0, len(arr)):
-                txt = arr[r].split(".")
-                dic_friends.append(txt[0])
+  
+def creat_dic_verify_friends():
+    dic_friends = []
+    arr = os.listdir(pathData())
+    i = 0 
+    while i <= len(arr):
+        for r in range(0, len(arr)):
+            txt = arr[r].split(".")
+            dic_friends.append(txt[0])
             i = i +1
-            break
-        return dic_friends
-    
-    def verify_friends(vid):
-        if vid in self.creat_dic_verify_friends():
-            print("je suis present !")
-        
-
-def fiends_pilote(vid, p):
-    for a in range(0, len(p)):
-        if(p[a]["userId"] == vid):
-            print("Callsign: " + p[a]["callsign"])
-
-def fiends_atc(vid):
-    x = verify_friends()
-    x.verify_friends(str(vid))
-    
+        break
+    return dic_friends
