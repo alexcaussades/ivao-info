@@ -90,4 +90,4 @@ def position_gen(ivaoupper, x):
   position_gnd(ivaoupper, x)
   position_afis(ivaoupper, x)
   position_crr(ivaoupper, x)
-  position_close(ivaoupper, x)
+  #position_close(ivaoupper, x)
