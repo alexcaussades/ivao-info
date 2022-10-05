@@ -16,6 +16,7 @@ from module.ia.findAtc import srAtc
 from module.help import help
 from module.ia.friend import add_friends as addFriends
 from module.ia.friend import creat_dic_verify_friends
+from module.ia.friend import get_dossier
 from module.ia.pilote_list import pilote_list
 from module.ia.atc_list import atc_list
 import pyttsx3
@@ -30,7 +31,8 @@ version()
 r = requests.get(url)
 atc = r.json()
 
-
+if(get_dossier() != True):
+  print("Creat Files System")
 
 x = atc["clients"]["atcs"]
 p = atc["clients"]["pilots"]
