@@ -81,7 +81,6 @@ try:
     list_ivao_pilot = pilote_list(p)
     list_pc = creat_dic_verify_friends()
     list_gen = list_ivao_atc + list_ivao_pilot
-
     for i in list_gen:
       for j in list_pc:
           if(i==j):
