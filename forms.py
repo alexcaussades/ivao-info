@@ -5,6 +5,7 @@ import requests
 import json
 import asyncio
 from module_forms.Ia.atc_serach import search_ATC
+from module_forms.Ia.class_log.class_pos import atc_pos
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
 update_version = "https://api.github.com/repos/alexcaussades/ivao-info/releases"
@@ -65,7 +66,22 @@ class mainWindows(QWidget):
         pass
         
     def list_sr(self, item):
-        print(item.text())
+        IcaoAtc = item.text()
+        atc = atc_pos(IcaoAtc)
+        pos_dic = atc.online_atc()
+        self.window = QWidget()
+        gridInfoSr = QGridLayout(self.window)
+        self.frequency = QLabel("Frequency : {0} Mhz".format(pos_dic["frequency"]))
+        self.metar = QLabel("METAR : {0} ".format(pos_dic["atis"][3]))
+        self.rwy = QLabel("RWY : {0} ".format(pos_dic["atis"][4]))
+        self.revision = QLabel("Revision : {0} ".format(pos_dic["revision"]))
+        self.window.setWindowTitle("Information for : {0}". format(pos_dic["atis"][1]))
+        self.window.grind = gridInfoSr
+        self.window.grind.addWidget(self.frequency, 0,0,1,2)
+        self.window.grind.addWidget(self.revision, 0,3,1,2)
+        self.window.grind.addWidget(self.metar, 1,0,1,4)
+        self.window.grind.addWidget(self.rwy, 2,0,1,4)
+        self.window.show()
         
                                  
     def search(self):
