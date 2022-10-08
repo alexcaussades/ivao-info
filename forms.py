@@ -38,10 +38,13 @@ class mainWindows(QWidget):
         self.main_w = QGridLayout(self)
         self.list_ATC = QListWidget()
         #self.list_ATC.hide()
+        self.list_ATC.itemDoubleClicked.connect(self.list_sr)
+        
         
         self.af = QLineEdit()
         self.af.setPlaceholderText("Search...")
         self.af.returnPressed.connect(self.search)
+        
         
         self.btn_enter = QPushButton("Entrée")
         self.check_Value_ATC = QCheckBox("ATC", self)
@@ -59,14 +62,18 @@ class mainWindows(QWidget):
         self.main_w.addWidget(self.version_app, 9, 2, 1, 1)
         
     def on_atc_click(self):
-        if True:
-            return x
+        pass
         
-                              
+    def list_sr(self, item):
+        print(item.text())
+        
+                                 
     def search(self):
-        srs = search_ATC(self.af.text())
+        self.list_ATC.show()
+        self.list_ATC.clear()
+        ivaoupper = self.af.text().upper()
+        srs = search_ATC(ivaoupper)
         srsf = srs.finaly_atc()
-        print(srsf)
         for i in range(0,len(srsf)):
             self.list_ATC.addItem(srsf[i])
                 
