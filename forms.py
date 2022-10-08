@@ -1,11 +1,15 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget
+from PySide6.QtWidgets import QApplication, QWidget, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog
 from PySide6.QtCore import Qt
 import requests
 import json
+import asyncio
+from module_forms.Ia.atc_serach import search_ATC
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
 update_version = "https://api.github.com/repos/alexcaussades/ivao-info/releases"
+
+url_VAC = "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_08_SEP_2022/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFPO.pdf"
 
 r = requests.get(url)
 atc = r.json()
@@ -13,37 +17,63 @@ atc = r.json()
 x = atc["clients"]["atcs"]
 p = atc["clients"]["pilots"]
 
+
 class mainWindows(QWidget):
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Sim IVAO Info Serv")
         self.resize(400, 400)
-        
-        #Label online ATCs and Pilote
-        self.atc_online = QLabel("ATCs : {0} Online - Pilots : {1} Online".format(len(x), len(p)))
+
+        # Label online ATCs and Pilote
+        self.atc_online = QLabel(
+            "Online: {0} ATC - {1} Pilot".format(len(x), len(p)))
         self.font = self.atc_online.font()
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
-        
+
         self.version_app = QLabel("Version Alpha 0.0.1")
         self.version_app.setAlignment(Qt.AlignRight)
-        
+
         self.main_w = QGridLayout(self)
         self.list_ATC = QListWidget()
+        #self.list_ATC.hide()
+        
         self.af = QLineEdit()
-        self.af.setPlaceholderText("ATCs Online")
+        self.af.setPlaceholderText("Search...")
+        self.af.returnPressed.connect(self.search)
+        
         self.btn_enter = QPushButton("Entrée")
-        self.btn_atc = QPushButton("text")
-
+        self.check_Value_ATC = QCheckBox("ATC", self)
+        self.check_Value_ATC.clicked.connect(self.on_atc_click)
+        
+        
+        self.check_Value_Pilote = QCheckBox("Pilot")
         
         self.main_w.addWidget(self.atc_online, 0, 0, 1, 4)
-        self.main_w.addWidget(self.list_ATC, 1, 0, 1, 3)
+        self.main_w.addWidget(self.check_Value_ATC, 2, 0, 1, 1)
+        self.main_w.addWidget(self.check_Value_Pilote, 2, 1, 1, 1)
+        self.main_w.addWidget(self.af, 2, 2, 1, 1)
+        # self.main_w.addWidget(self.btn_enter, 2, 3, 1, 1)
+        self.main_w.addWidget(self.list_ATC, 3, 0, 1, 3)
+        self.main_w.addWidget(self.version_app, 9, 2, 1, 1)
         
-        self.main_w.addWidget(self.af, 2,0,1,1)
-        self.main_w.addWidget(self.btn_enter, 2,2,1,1)
-        self.main_w.addWidget(self.btn_atc, 3, 0, 1, 4)
-        self.main_w.addWidget(self.version_app, 4,2,1,1)
+    def on_atc_click(self):
+        if True:
+            return x
+        
+                              
+    def search(self):
+        srs = search_ATC(self.af.text())
+        srsf = srs.finaly_atc()
+        print(srsf)
+        for i in len(srsf):
+            self.list_ATC.addItem(i)
+        
+       
+        
+        
+    
 
 app = QApplication()
 main_windows = mainWindows()
