@@ -15,11 +15,22 @@ atc = r.json()
 x = atc["clients"]["atcs"]
 
 class search_ATC:
+    """Classe sur la recheche des ATC en ligne sur IVAO 
+    """    
     
     def __init__(self, ivao):
         self.ivao = ivao
     
     def srAtc2(self):
+        """ Recheche des ATC en ligne sur IVAO et filte par la recherche des données envoyer par l'utilisateur dans la class !
+        
+        Keyword arguments:
+            - ``ivao`` = ``information utilisteur``
+            - ``x ``=``list de ivao en format JSON``
+            
+        Returns:
+            - ``res``: ``List(string)``
+        """
         addJocker = self.ivao 
         icaoList = []
         for a in range(0, len(x)):
@@ -29,11 +40,15 @@ class search_ATC:
             return res
     
     def finaly_atc(self):
+        """ Class Final du filtrage des ATCs\n
+        Function :
+            ``srAtc2 -> list``
+        """        
         r = self.srAtc2()
         return r                 
         
                    
-if __name__ == '__main__':
-    a = search_ATC("LF")
-    print(a.finaly_atc())    
+# if __name__ == '__main__':
+#     a = search_ATC("LF")
+#     print(a.finaly_atc())    
     

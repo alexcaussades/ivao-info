@@ -67,9 +67,9 @@ class mainWindows(QWidget):
         srs = search_ATC(self.af.text())
         srsf = srs.finaly_atc()
         print(srsf)
-        for i in len(srsf):
-            self.list_ATC.addItem(i)
-        
+        for i in range(0,len(srsf)):
+            self.list_ATC.addItem(srsf[i])
+                
        
         
         
