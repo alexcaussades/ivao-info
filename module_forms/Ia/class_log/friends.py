@@ -4,7 +4,7 @@ import os
 from pytz import timezone
 import pytz
 from uuid import uuid4
-from file import file
+from module_forms.Ia.class_log.file import file 
 from datetime import datetime
 from time import time, timezone
 
