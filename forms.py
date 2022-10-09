@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon, QShortcut, QShortcutEvent
 import requests
 import json
 import asyncio
-from module_forms.Ia.atc_serach import search_ATC
+from module_forms.Ia.class_log.atc_serach import search_ATC
 from module_forms.Ia.class_log.class_pos import atc_pos
+from module_forms.Ia.class_log.file import file
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
 update_version = "https://api.github.com/repos/alexcaussades/ivao-info/releases"
@@ -24,7 +27,8 @@ class mainWindows(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Sim IVAO Info Serv")
-        self.resize(400, 400)
+        self.resize(600, 600)
+        self.setWindowIcon(QIcon("./module_forms/icons/airplane.png"))
 
         # Label online ATCs and Pilote
         self.atc_online = QLabel(
@@ -38,7 +42,6 @@ class mainWindows(QWidget):
 
         self.main_w = QGridLayout(self)
         self.list_ATC = QListWidget()
-        #self.list_ATC.hide()
         self.list_ATC.itemDoubleClicked.connect(self.list_sr)
         
         
@@ -48,12 +51,13 @@ class mainWindows(QWidget):
         
         
         self.btn_enter = QPushButton("Entrée")
+        
         self.check_Value_ATC = QCheckBox("ATC", self)
+      
         self.check_Value_ATC.clicked.connect(self.on_atc_click)
         
         
         self.check_Value_Pilote = QCheckBox("Pilot")
-        
         self.main_w.addWidget(self.atc_online, 0, 0, 1, 4)
         self.main_w.addWidget(self.check_Value_ATC, 2, 0, 1, 1)
         self.main_w.addWidget(self.check_Value_Pilote, 2, 1, 1, 1)
@@ -63,22 +67,24 @@ class mainWindows(QWidget):
         self.main_w.addWidget(self.version_app, 9, 2, 1, 1)
         
     def on_atc_click(self):
-        pass
+        return True
         
     def list_sr(self, item):
         IcaoAtc = item.text()
         atc = atc_pos(IcaoAtc)
         pos_dic = atc.online_atc()
         self.window = QWidget()
+        self.window.setWindowIcon(QIcon("./module_forms/icons/lock.png"))
         gridInfoSr = QGridLayout(self.window)
         self.frequency = QLabel("Frequency : {0} Mhz".format(pos_dic["frequency"]))
+        self.frequency.setStyleSheet("color: red; font-weight: bold;")
         self.metar = QLabel("METAR : {0} ".format(pos_dic["atis"][3]))
         self.rwy = QLabel("RWY : {0} ".format(pos_dic["atis"][4]))
-        self.revision = QLabel("Revision : {0} ".format(pos_dic["revision"]))
+        self.revision = QLabel("{0}".format(pos_dic["atis"][2]))
         self.window.setWindowTitle("Information for : {0}". format(pos_dic["atis"][1]))
         self.window.grind = gridInfoSr
         self.window.grind.addWidget(self.frequency, 0,0,1,2)
-        self.window.grind.addWidget(self.revision, 0,3,1,2)
+        self.window.grind.addWidget(self.revision, 0,2,1,1)
         self.window.grind.addWidget(self.metar, 1,0,1,4)
         self.window.grind.addWidget(self.rwy, 2,0,1,4)
         self.window.show()
@@ -97,8 +103,11 @@ class mainWindows(QWidget):
         
         
     
-
+file().creat_arborecence()
+#file().openfiles()
 app = QApplication()
 main_windows = mainWindows()
 main_windows.show()
 app.exec()
+
+
