@@ -27,4 +27,5 @@ class atc_pos():
                 i['timestamp'] = x[a]["createdAt"]
                 i["rating"] = x[a]["rating"]
                 i["userId"] = x[a]["userId"]
+                i["timestamp"]= x[a]["time"]
                 return i
