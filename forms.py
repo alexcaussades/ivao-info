@@ -13,6 +13,7 @@ from module_forms.Ia.class_log.friends import friend
 from module_forms.Ia.class_log.time_log import timeLog
 from module_forms.Ia.preference.pref import pref
 from module_forms.Ia.class_log.airac import airac
+from module_forms.Ia.class_log.version import version
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
 update_version = "https://api.github.com/repos/alexcaussades/ivao-info/releases"
@@ -44,7 +45,7 @@ class mainWindows(QWidget):
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
 
-        self.version_app = QLabel("Version Alpha 0.0.1")
+        self.version_app = QLabel("Version "+ version("0.5.1","alpha").getVersion())
         self.version_app.setAlignment(Qt.AlignRight)
 
         self.main_w = QGridLayout(self)
