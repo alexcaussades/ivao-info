@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QMessageBox, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog
+from PySide6.QtWidgets import QApplication, QWidget, QMessageBox, QSystemTrayIcon, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog, QMenu, QToolBar
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon, QShortcut, QShortcutEvent
+from PySide6.QtGui import QIcon, QShortcut, QShortcutEvent, QAction
 import requests
 import json
 import asyncio
@@ -33,7 +33,10 @@ class mainWindows(QWidget):
         self.setWindowTitle("Sim IVAO Info Serv")
         self.resize(600, 600)
         self.setWindowIcon(QIcon("./module_forms/icons/airplane.png"))
-
+        
+        self.btn_friend = QPushButton("Friends")
+        self.btn_friend.clicked.connect(self.btn_friends)
+                                
         # Label online ATCs and Pilote
         self.atc_online = QLabel(
             "Online: {0} ATC - {1} Pilot".format(len(x), len(p)))
@@ -68,7 +71,8 @@ class mainWindows(QWidget):
         self.check_Value_Pilote.setCheckable(True)
         self.check_Value_Pilote.clicked.connect(self.on_pilote_click)
         
-        self.main_w.addWidget(self.atc_online, 0, 0, 1, 4)
+        self.main_w.addWidget(self.btn_friend, 0,0,1,1)
+        self.main_w.addWidget(self.atc_online, 1, 0, 1, 4)
         self.main_w.addWidget(self.check_Value_ATC, 2, 0, 1, 1)
         self.main_w.addWidget(self.check_Value_Pilote, 2, 1, 1, 1)
         self.main_w.addWidget(self.af, 2, 2, 1, 1)
@@ -76,15 +80,25 @@ class mainWindows(QWidget):
         self.main_w.addWidget(self.list_ATC, 3, 0, 1, 3)
         #self.main_w.addWidget(self.url, 8,2,1,1)
         #self.main_w.addWidget(self.airac, 9,0,1,1)
-        self.main_w.addWidget(self.version_app, 9, 2, 1, 1)
-       
-       
+        self.main_w.addWidget(self.version_app, 9, 2, 1, 1)        
+    
+    def btn_friends(self):
+        i = 0
+        self.windowFriend = QWidget()
+        gridInfoSr = QGridLayout(self.windowFriend)
+        vidsList = friend().verif_friend()
+        self.ghj = QLabel("Friends Online : ")              
+        self.windowFriend.grind = gridInfoSr
+        self.windowFriend.setWindowTitle("Friends")
+        self.windowFriend.grind.addWidget(self.ghj, 0,0,1,2)
+        self.windowFriend.show()
+        
+        
+            
     def on_atc_click(self, check):
         if check:
-            self.search(self)
-        else:
-            pass
-            
+            return check     
+        
     def on_pilote_click(self, check):
         if True:
             print(check)
