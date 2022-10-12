@@ -93,11 +93,12 @@ class mainWindows(QWidget):
         self.windowFriend.grind.addWidget(self.ghj, 0,0,1,2)
         self.windowFriend.show()
         
-        
-            
+    
     def on_atc_click(self, check):
         if check:
-            return check     
+            print("je suis la")
+        else:
+            print("je ne suis pas là ")   
         
     def on_pilote_click(self, check):
         if True:
@@ -160,7 +161,7 @@ class mainWindows(QWidget):
         vid = []        
         for i in range(0,len(srsf)):    
             pos = atc_pos(srsf[i]).online_atc()
-            vid.append(pos["userId"])
+            #vid.append(pos["userId"])
             self.list_ATC.addItem(str(pos["callsign"]))
             #self.list_ATC.setStyleSheet("color: green; font-weight: bold;")
             #self.list_ATC.addItem(str(pos["callsign"]))
