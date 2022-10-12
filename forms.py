@@ -83,17 +83,25 @@ class mainWindows(QWidget):
         self.main_w.addWidget(self.version_app, 9, 2, 1, 1)        
     
     def btn_friends(self):
-        i = 0
         self.windowFriend = QWidget()
         gridInfoSr = QGridLayout(self.windowFriend)
         vidsList = friend().verif_friend()
-        self.ghj = QLabel("Friends Online : ")              
+        self.ghj = QLabel("Friends Online : ")
+        list_ivao_atc = friend(list=x).atc_list()
+        list_pc = vidsList
+        list_gen = list_ivao_atc
+        for i in list_gen:
+            for j in list_pc:
+                if(i==j):
+                    i = i
+                    break
+        self.returnVid = QLabel("Fonctionnalité en cour de devs")             
         self.windowFriend.grind = gridInfoSr
         self.windowFriend.setWindowTitle("Friends")
         self.windowFriend.grind.addWidget(self.ghj, 0,0,1,2)
+        self.windowFriend.grind.addWidget(self.returnVid, 0,2,1,2)
         self.windowFriend.show()
         
-    
     def on_atc_click(self, check):
         if check:
             print("je suis la")

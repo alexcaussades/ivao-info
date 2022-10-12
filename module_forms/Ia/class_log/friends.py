@@ -1,9 +1,7 @@
 from pathlib import Path
 import json
 import os
-from turtle import width
 from pytz import timezone
-import pytz
 from uuid import uuid4
 from module_forms.Ia.class_log.file import file 
 from datetime import datetime
@@ -14,10 +12,11 @@ from module_forms.Ia.class_log.time_log import timeLog
 
 class friend(timeLog):
     
-    def __init__(self, vid=None, uuid=None) -> None:
+    def __init__(self, vid=None, uuid=None, list=None) -> None:
         super().__init__()
         self.vid = vid
         self.uuid = str(uuid4())
+        self.list = list
         
     def check_docs_friend(self):
         return file().pathData_friend()
@@ -49,6 +48,16 @@ class friend(timeLog):
                 dic_vid.append(datavid["vid"])
                 continue  
         return dic_vid
+    
+    def atc_list(self):
+        list_ivao_atc = []
+        i = 0
+        while i <= len(self.list):
+            for r in range(0, len(self.list)):
+                list_ivao_atc.append(self.list[r]["userId"])
+                i = i +1
+            break
+        return list_ivao_atc
     
     def verif_friend(self):
        return self.creatDicFriend()
