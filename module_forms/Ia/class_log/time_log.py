@@ -14,7 +14,7 @@ class timeLog:
 
     def get_TimesTamp(self):
         timestamp = self.timestamp
-        date_time = datetime.fromtimestamp(timestamp)
+        date_time = datetime.utcfromtimestamp(timestamp)
         str_date_time = date_time.strftime("%H:%M")
         return str_date_time
 

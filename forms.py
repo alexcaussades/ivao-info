@@ -120,6 +120,9 @@ class mainWindows(QWidget):
             self.revision = QLabel("{0}".format(pos_dic["atis"][2]))
         except:
             self.revision = QLabel("")
+        
+        
+        
         self.timestamp = QLabel("Online: {0}".format(timeLog(pos_dic["timestamp"]).get_TimesTamp()))
         self.window.setWindowTitle("Information for : {0}". format(pos_dic["atis"][1]))
         self.window.grind = gridInfoSr
@@ -128,18 +131,27 @@ class mainWindows(QWidget):
         self.window.grind.addWidget(self.metar, 1,0,1,4)
         self.window.grind.addWidget(self.rwy, 2,0,1,4)
         self.window.grind.addWidget(self.timestamp, 3,0,1,3)
-        if data['devs'] != False :
-            self.window.grind.addWidget(self.addfriend, 4,4,1,1)
+        self.window.grind.addWidget(self.addfriend, 4,4,1,1)
         self.window.show()
-                                        
+    
+    # revoir la function !                                    
     def search(self):
         self.list_ATC.show()
         self.list_ATC.clear()
         ivaoupper = self.af.text().upper()
         srs = search_ATC(ivaoupper)
         srsf = srs.finaly_atc()
-        for i in range(0,len(srsf)):
-            self.list_ATC.addItem(srsf[i])
+        liste = []
+        liste.append(friend().verif_friend())
+        vid = []        
+        for i in range(0,len(srsf)):    
+            pos = atc_pos(srsf[i]).online_atc()
+            vid.append(pos["userId"])
+            self.list_ATC.addItem(str(pos["callsign"]))
+            #self.list_ATC.setStyleSheet("color: green; font-weight: bold;")
+            #self.list_ATC.addItem(str(pos["callsign"]))
+                    
+                            
                 
     def addFriend(self):
         self.vid = self.vidAdd

@@ -5,10 +5,6 @@ import requests
 sys.setrecursionlimit(150)
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
-update_version = "https://api.github.com/repos/alexcaussades/ivao-info/releases"
-
-url_VAC = "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_08_SEP_2022/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2.LFPO.pdf"
-
 r = requests.get(url)
 atc = r.json()
 
@@ -45,10 +41,14 @@ class search_ATC:
             ``srAtc2 -> list``
         """        
         r = self.srAtc2()
-        return r                 
-        
-                   
-# if __name__ == '__main__':
-#     a = search_ATC("LF")
-#     print(a.finaly_atc())    
+        return r  
+    
+    
+    def finaly_vid(self):
+        r = self.sr_vid()
+        return r 
+    
+if __name__ == '__main__':
+    a = search_ATC("LF")
+    print(a.dic_atc())    
     
