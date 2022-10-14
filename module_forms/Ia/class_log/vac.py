@@ -1,9 +1,9 @@
 import re
 import requests
 from module_forms.Ia.class_log.airac import airac
+#from airac import airac
 
-
-class chart_vac:
+class chart_vac(airac):
     
     def __init__(self, icao) -> None:
         super().__init__()
@@ -21,13 +21,10 @@ class chart_vac:
             return ""
         
     def creatUrlShema(self):
-        url = self.urlStart + self.airac + self.urlend + self.express() + self.extention
-        request = requests.get(url)
-        if request.status_code == 200:
-            #open(self.icao + self.extention, 'wb').write(request.content)
-            return url
+        url = self.urlStart + str(self.airac) + self.urlend + self.express() + self.extention
+        return str(url)
        
     
 if __name__ == '__main__':
-    a = chart_vac("lfbl").creatUrlShema()
+    a = chart_vac("LFBO_APP").creatUrlShema()
     print(a)

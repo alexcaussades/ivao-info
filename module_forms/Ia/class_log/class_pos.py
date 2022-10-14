@@ -22,7 +22,10 @@ class atc_pos():
                     i["atis"] = x[a]["atis"]["lines"]
                 except:
                     i["atis"] = None
-                i["revision"] = x[a]["atis"]["revision"]
+                try:
+                    i["revision"] = x[a]["atis"]["revision"]
+                except:
+                    i["revision"] = None
                 i['timestamp'] = x[a]["createdAt"]
                 i["rating"] = x[a]["rating"]
                 i["userId"] = x[a]["userId"]
