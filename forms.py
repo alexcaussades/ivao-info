@@ -45,7 +45,7 @@ class mainWindows(QWidget):
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
 
-        self.version_app = QLabel("Version "+ version("0.5.1","alpha").getVersion())
+        self.version_app = QLabel("Version "+ version("0.5.2","alpha").getVersion())
         self.version_app.setAlignment(Qt.AlignRight)
 
         self.main_w = QGridLayout(self)
