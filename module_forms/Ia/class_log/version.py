@@ -1,8 +1,35 @@
+import requests
+import os
+from pathlib import Path
+import zipfile
+import re
+
 class version:
-    
+       
     def __init__(self, numero, typeOfVersion ) -> None:
         self.numero = numero
         self.typeOfVersion = typeOfVersion
+        self.url = "https://api.github.com/repos/alexcaussades/ivao-info/releases/latest"
     
     def getVersion(self):
         return self.numero+"-"+self.typeOfVersion
+    
+    def getUrlReleasesGithub(self):
+        r = requests.get(self.url)
+        res = r.json()
+        releases = {"name": res["name"], "urlFiles": res["assets"][0]["browser_download_url"], "body": res["body"], "urlGithub": res["url"], "size": res["assets"][0]["size"], "download_count": res["assets"][0]["download_count"], "created_at": res["assets"][0]["created_at"], "nameFiles": res["assets"][0]["name"] }
+        return releases
+    
+    def verrify_version(self):
+        nameFiles = self.getUrlReleasesGithub()['nameFiles'].split(".")
+        if "V"+ self.getVersion() != self.getUrlReleasesGithub()['name']:
+           newVersion =  requests.get(self.getUrlReleasesGithub()["urlFiles"])
+           with open(os.path.join(Path.home(), "Downloads", self.getUrlReleasesGithub()['nameFiles'] ), "wb") as f:
+               f.write(newVersion.content)
+               with zipfile.ZipFile(os.path.join(Path.home(), "Downloads", self.getUrlReleasesGithub()['nameFiles']), 'r') as zip_ref:
+                zip_ref.extractall(os.path.join(Path.home(), "Downloads", self.getUrlReleasesGithub()['name']))
+                os.system("start "+ os.path.join(Path.home(), "Downloads", self.getUrlReleasesGithub()['name'], nameFiles[0]))
+        
+if __name__ == '__main__':
+    a = version("0.5.1", "Alpha").verrify_version()
+    print(a)
