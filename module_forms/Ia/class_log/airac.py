@@ -8,11 +8,18 @@ class airac(timeLog):
         timeLog.__init__(self)  
         
     def airac_data(self):
-        data = open(os.path.join("module_forms/ia/class_log/data-airac.json"))
-        with data:
-            airacdata = json.load(data)
-            #print(airacdata["2022"]["10"])
-            return airacdata
+        try:
+            data = open(os.path.join("module_forms/ia/class_log/data-airac.json"))
+            with data:
+                    airacdata = json.load(data)
+                    #print(airacdata["2022"]["10"])
+                    return airacdata
+        except:
+            data = open(os.path.join("lib/module_forms/ia/class_log/data-airac.json"))
+            with data:
+                    airacdata = json.load(data)
+                    #print(airacdata["2022"]["10"])
+                    return airacdata
     
     def get_airac(self):
         airacData = self.airac_data()

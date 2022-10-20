@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from PySide6.QtWidgets import QApplication, QWidget, QMessageBox, QSystemTrayIcon, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog, QMenu, QToolBar
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtWidgets import QApplication, QWidget, QProgressBar, QMessageBox, QSystemTrayIcon, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog, QMenu, QToolBar
+from PySide6.QtCore import Qt, QTimer, QProcess
 from PySide6.QtGui import QIcon, QShortcut, QShortcutEvent, QAction
 import requests
 import webbrowser
 import time
+import logging
+from module_forms.Ia.class_log.airport import aiport
 from module_forms.Ia.class_log.atc_serach import search_ATC
 from module_forms.Ia.class_log.class_pos import atc_pos
 from module_forms.Ia.class_log.file import file
@@ -30,14 +32,24 @@ class mainWindows(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Sim IVAO Info Serv")
+        self.setWindowTitle("IVAO Info Serv")
         self.resize(600, 600)
-        self.setWindowIcon(QIcon("./module_forms/icons/airplane.png"))
+        try:
+            self.setWindowIcon(QIcon(QIcon("module_forms/icons/airplane.png")))
+        except:
+            self.setWindowIcon(QIcon(QIcon("./lib/module_forms/icons/airplane.png")))
+            
         self.url_profile = "https://ivao.aero/Login.aspx?r=Member.aspx?Id="
         
         self.btn_friend = QPushButton("Friends")
         self.btn_friend.clicked.connect(self.btn_friends)
-                                
+                
+        self.btn_metr = QPushButton("Metar")
+        self.btn_metr.clicked.connect(self.btn_metar)
+        
+        self.btn_account = QPushButton("Profile")
+        self.btn_account.clicked.connect(self.btn_metar)
+                               
         # Label online ATCs and Pilote
         self.atc_online = QLabel(
             "Online: {0} ATC - {1} Pilot".format(len(x), len(p)))
@@ -47,35 +59,47 @@ class mainWindows(QWidget):
 
         self.version_app = QLabel("Version "+ version("0.5.2","alpha").getVersion())
         self.version_app.setAlignment(Qt.AlignRight)
-
+        
+        self.box = QVBoxLayout(self)
         self.main_w = QGridLayout(self)
+        self.vertical = QHBoxLayout(self)
+        
         self.list_ATC = QListWidget()
         self.list_ATC.itemDoubleClicked.connect(self.list_sr)
         
         self.af = QLineEdit()
         self.af.setPlaceholderText("Search...")
+        self.af.setGeometry(320, 90, 200, 30)
         self.af.returnPressed.connect(self.search)
                 
         self.reload = QPushButton("Reload")
-        self.reload.setIcon(QIcon(QIcon("./module_forms/icons/synchronize.png")))
+        try:
+            self.reload.setIcon(QIcon("module_forms/icons/synchronize.png"))
+        except:
+            self.reload.setIcon(QIcon("lib/module_forms/icons/synchronize.png"))
         self.reload.clicked.connect(self.update_enter)
         
-        self.check_Value_ATC = QCheckBox("ATC", self)
-        self.check_Value_ATC.setCheckable(True)
-        self.check_Value_ATC.clicked.connect(self.on_atc_click)
         
-        self.check_Value_Pilote = QCheckBox("Pilot")
-        self.check_Value_Pilote.setCheckable(True)
-        self.check_Value_Pilote.clicked.connect(self.on_pilote_click)
+        self.progress = QProgressBar()
+        self.progress.setRange(0, 100)
+        self.progress.setTextVisible(True)
+        self.progress.setValue(0)
         
-        self.main_w.addWidget(self.btn_friend, 0,0,1,1)
-        self.main_w.addWidget(self.reload, 0,1,1,1)
+        # Position des sections
+        self.box.addLayout(self.vertical)        
+        self.box.addLayout(self.main_w)
+        
+        
+        self.vertical.addWidget(self.btn_friend)
+        self.vertical.addWidget(self.reload)
+        self.vertical.addWidget(self.btn_metr)
+        #self.vertical.addWidget(self.btn_account)
         self.main_w.addWidget(self.atc_online, 1, 0, 1, 4)
-        self.main_w.addWidget(self.check_Value_ATC, 2, 0, 1, 1)
-        self.main_w.addWidget(self.check_Value_Pilote, 2, 1, 1, 1)
-        self.main_w.addWidget(self.af, 2, 2, 1, 1)
+        self.main_w.addWidget(self.af, 2, 0, 1, 2)
         self.main_w.addWidget(self.list_ATC, 3, 0, 1, 3)
-        self.main_w.addWidget(self.version_app, 9, 2, 1, 1)  
+        #self.main_w.addWidget(self.progress, 4, 1, 1, 1)
+        self.main_w.addWidget(self.version_app, 9, 3, 1, 1)
+        
     
     def update_json_atc(self):
         url = "https://api.ivao.aero/v2/tracker/whazzup"
@@ -102,7 +126,37 @@ class mainWindows(QWidget):
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
         self.main_w.addWidget(self.atc_online, 1, 0, 1, 4)
+    
+    
+    # revoir fuction
+    def btn_metar(self):
+        self.windowMetar = QWidget()
+        metarsr = QLabel("METAR Search : ")
+        metarReturn = QLabel("METAR : ")
+        metarTaf = QLabel("TAF : ")
+        metarInfo = QVBoxLayout(self.windowMetar)
+        grid = QGridLayout(self.windowMetar)
+        vertical = QHBoxLayout(self.windowMetar)
+        self.lineedit = QLineEdit(self.windowMetar)
+        self.lineedit.returnPressed.connect()
+        a = self.lineedit.text()
+        print(a)    
+        self.windowMetar.metar = metarInfo
+        self.windowMetar.metar.addLayout(grid)
+        self.windowMetar.mertarGrid = grid
+        self.windowMetar.setWindowTitle("Plateforme Search")
+        self.windowMetar.mertarGrid.addWidget(metarsr, 0,0,1,2)
+        self.windowMetar.mertarGrid.addWidget(self.lineedit, 0,2,1,2)
+        self.windowMetar.mertarGrid.addWidget(metarReturn, 1,1,1,2)
+        #self.windowMetar.mertarGrid.addWidget(self.metarSR(), 1,1,1,2)
+        self.windowMetar.show()
         
+    def metarSR(self):
+        
+        a = aiport(self.lineedit.text()).metar()
+        print(a["metar"])
+        
+            
     def btn_friends(self):
         self.windowFriend = QWidget()
         gridInfoSr = QGridLayout(self.windowFriend)
@@ -124,15 +178,6 @@ class mainWindows(QWidget):
         self.windowFriend.grind.addWidget(self.returnVid, 0,2,1,2)
         self.windowFriend.show()
         
-    def on_atc_click(self, check):
-        if check:
-            print("je suis la")
-        else:
-            print("je ne suis pas là ")   
-        
-    def on_pilote_click(self, check):
-        if True:
-            print(check)
     
     def chart(self):   
         url = "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_06_OCT_2022/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2."+self.plateforme+".pdf"
@@ -148,22 +193,34 @@ class mainWindows(QWidget):
         atc = atc_pos(IcaoAtc)
         pos_dic = atc.online_atc()
         self.window = QWidget()
-        self.window.setWindowIcon(QIcon("./module_forms/icons/lock.png"))
+        try:
+            self.window.setWindowIcon(QIcon("module_forms/icons/lock.png"))
+        except:
+            self.window.setWindowIcon(QIcon("lib/module_forms/icons/lock.png"))
         gridInfoSr = QGridLayout(self.window)
         
         self.plateforme = chart_vac(IcaoAtc).express()
         self.vac = QPushButton("VAC")
-        self.vac.setIcon(QIcon(QIcon("./module_forms/icons/pdf.png")))
+        try:
+            self.vac.setIcon(QIcon(QIcon("module_forms/icons/pdf.png")))
+        except:
+            self.vac.setIcon(QIcon(QIcon("lib/module_forms/icons/pdf.png")))
         self.vac.clicked.connect(self.chart)
         
         self.vidAdd = pos_dic["userId"]
         
         self.addfriend = QPushButton("Add Friends")
-        self.addfriend.setIcon(QIcon(QIcon("./module_forms/icons/user--plus.png")))
+        try:
+            self.addfriend.setIcon(QIcon(QIcon("module_forms/icons/user--plus.png")))
+        except:
+            self.addfriend.setIcon(QIcon(QIcon("lib/module_forms/icons/user--plus.png")))
         self.addfriend.clicked.connect(self.addFriend)
         
         self.profil_users = QPushButton("Account Users")
-        self.profil_users.setIcon(QIcon(QIcon("./module_forms/icons/user-green.png")))
+        try:
+            self.profil_users.setIcon(QIcon(QIcon("module_forms/icons/user-green.png")))
+        except:
+            self.profil_users.setIcon(QIcon(QIcon("lib/module_forms/icons/user-green.png")))
         self.profil_users.clicked.connect(self.profil_web)
         
         if(self.vidAdd in friend().verif_friend()):
