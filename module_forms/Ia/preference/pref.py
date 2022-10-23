@@ -9,7 +9,7 @@ class pref:
         pass
     
     def creatdic(self):
-        dic = {"devs": False, "friend": False}
+        dic = {"devs": False, "friend": False, "favoryPlatefrome": "LFBL"}
         return dic
     
     def get_pref(self):
