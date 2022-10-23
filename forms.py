@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
+
 from PySide6.QtWidgets import QApplication, QWidget, QProgressBar, QMessageBox, QSystemTrayIcon, QFrame, QHBoxLayout, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit, QListWidget, QCheckBox, QButtonGroup, QDialog, QMenu, QToolBar
 from PySide6.QtCore import Qt, QTimer, QProcess
+
 from PySide6.QtGui import QIcon, QShortcut, QShortcutEvent, QAction
 import requests
 import webbrowser
 import time
+
 import logging
 import os
 from module_forms.Ia.class_log.airport import aiport
+
 from module_forms.Ia.class_log.atc_serach import search_ATC
 from module_forms.Ia.class_log.class_pos import atc_pos
 from module_forms.Ia.class_log.file import file
@@ -18,6 +22,7 @@ from module_forms.Ia.preference.pref import pref
 from module_forms.Ia.class_log.airac import airac
 from module_forms.Ia.class_log.version import version
 from module_forms.Ia.class_log.metar_sr import Form
+
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
 
@@ -36,15 +41,17 @@ class mainWindows(QWidget):
         super().__init__()
         self.setWindowTitle("IVAO Info Serv")
         self.resize(600, 600)
+
         try:
             self.setWindowIcon(QIcon(QIcon("module_forms/icons/airplane.png")))
         except:
             self.setWindowIcon(QIcon(QIcon("./lib/module_forms/icons/airplane.png")))
             
-        self.url_profile = "https://ivao.aero/Login.aspx?r=Member.aspx?Id="
+
         
         self.btn_friend = QPushButton("Friends")
         self.btn_friend.clicked.connect(self.btn_friends)
+
                 
         self.btn_metr = QPushButton("Metar")
         self.btn_metr.clicked.connect(self.btn_metar)
@@ -59,7 +66,9 @@ class mainWindows(QWidget):
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
 
+
         self.version_app = QLabel("Version "+ version("0.5.3","alpha").getVersion())
+
         self.version_app.setAlignment(Qt.AlignRight)
         
         self.box = QVBoxLayout(self)
@@ -75,6 +84,7 @@ class mainWindows(QWidget):
         self.af.returnPressed.connect(self.search)
                 
         self.reload = QPushButton("Reload")
+
         try:
             self.reload.setIcon(QIcon("module_forms/icons/synchronize.png"))
         except:
@@ -86,12 +96,13 @@ class mainWindows(QWidget):
         self.progress.setRange(0, 100)
         self.progress.setTextVisible(True)
         self.progress.setValue(0)
-        
+
         # Position des sections
         self.box.addLayout(self.vertical)        
         self.box.addLayout(self.main_w)
         
         
+
         self.vertical.addWidget(self.btn_friend)
         self.vertical.addWidget(self.reload)
         self.vertical.addWidget(self.btn_metr)
@@ -102,6 +113,7 @@ class mainWindows(QWidget):
         #self.main_w.addWidget(self.progress, 4, 1, 1, 1)
         self.main_w.addWidget(self.version_app, 9, 3, 1, 1)
         
+
     
     def update_json_atc(self):
         url = "https://api.ivao.aero/v2/tracker/whazzup"
@@ -128,6 +140,7 @@ class mainWindows(QWidget):
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
         self.main_w.addWidget(self.atc_online, 1, 0, 1, 4)
+
     
     
     # revoir fuction
@@ -143,6 +156,7 @@ class mainWindows(QWidget):
          
         
             
+
     def btn_friends(self):
         self.windowFriend = QWidget()
         gridInfoSr = QGridLayout(self.windowFriend)
@@ -163,7 +177,6 @@ class mainWindows(QWidget):
         self.windowFriend.grind.addWidget(self.ghj, 0,0,1,2)
         self.windowFriend.grind.addWidget(self.returnVid, 0,2,1,2)
         self.windowFriend.show()
-        
     
     def chart(self):   
         url = "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_06_OCT_2022/Atlas-VAC/PDF_AIPparSSection/VAC/AD/AD-2."+self.plateforme+".pdf"
@@ -187,15 +200,18 @@ class mainWindows(QWidget):
         
         self.plateforme = chart_vac(IcaoAtc).express()
         self.vac = QPushButton("VAC")
+
         try:
             self.vac.setIcon(QIcon(QIcon("module_forms/icons/pdf.png")))
         except:
             self.vac.setIcon(QIcon(QIcon("lib/module_forms/icons/pdf.png")))
+
         self.vac.clicked.connect(self.chart)
         
         self.vidAdd = pos_dic["userId"]
         
         self.addfriend = QPushButton("Add Friends")
+
         try:
             self.addfriend.setIcon(QIcon(QIcon("module_forms/icons/user--plus.png")))
         except:
@@ -207,6 +223,7 @@ class mainWindows(QWidget):
             self.profil_users.setIcon(QIcon(QIcon("module_forms/icons/user-green.png")))
         except:
             self.profil_users.setIcon(QIcon(QIcon("lib/module_forms/icons/user-green.png")))
+
         self.profil_users.clicked.connect(self.profil_web)
         
         if(self.vidAdd in friend().verif_friend()):

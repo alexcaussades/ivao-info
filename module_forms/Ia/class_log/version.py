@@ -49,3 +49,4 @@ class version:
         while self.completed < 100:
             self.completed += 0.0001
             self.progress.setValue(self.completed) 
+
