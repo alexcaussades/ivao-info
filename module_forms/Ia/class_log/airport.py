@@ -1,3 +1,4 @@
+from itertools import count
 import requests
 import logging
 import re
@@ -45,7 +46,18 @@ class aiport:
             "timestamp": returnmetar["time"]["dt"]
         }
         return metar
-
+    
+    def runways(self):
+        d = {}
+        f = self.station()
+        r = f["runways"]
+        #lenR = len(f["runways"])
+        for a in range(0, len(r)):
+            print(a)
+            d[a] = r[a]["ident1"], r[a]["ident2"]
+        return d
+        
+            
 if __name__ == '__main__':
-    a = aiport("LFBL").taf()
+    a = aiport("LFbl").runways()
     print(a)

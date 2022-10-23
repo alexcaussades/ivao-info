@@ -6,6 +6,7 @@ import requests
 import webbrowser
 import time
 import logging
+import os
 from module_forms.Ia.class_log.airport import aiport
 from module_forms.Ia.class_log.atc_serach import search_ATC
 from module_forms.Ia.class_log.class_pos import atc_pos
@@ -16,6 +17,7 @@ from module_forms.Ia.class_log.vac import chart_vac
 from module_forms.Ia.preference.pref import pref
 from module_forms.Ia.class_log.airac import airac
 from module_forms.Ia.class_log.version import version
+from module_forms.Ia.class_log.metar_sr import Form
 
 url = "https://api.ivao.aero/v2/tracker/whazzup"
 
@@ -57,7 +59,7 @@ class mainWindows(QWidget):
         self.font.setPointSize(10)
         self.atc_online.setFont(self.font)
 
-        self.version_app = QLabel("Version "+ version("0.5.2","alpha").getVersion())
+        self.version_app = QLabel("Version "+ version("0.5.3","alpha").getVersion())
         self.version_app.setAlignment(Qt.AlignRight)
         
         self.box = QVBoxLayout(self)
@@ -130,31 +132,15 @@ class mainWindows(QWidget):
     
     # revoir fuction
     def btn_metar(self):
-        self.windowMetar = QWidget()
-        metarsr = QLabel("METAR Search : ")
-        metarReturn = QLabel("METAR : ")
-        metarTaf = QLabel("TAF : ")
-        metarInfo = QVBoxLayout(self.windowMetar)
-        grid = QGridLayout(self.windowMetar)
-        vertical = QHBoxLayout(self.windowMetar)
-        self.lineedit = QLineEdit(self.windowMetar)
-        self.lineedit.returnPressed.connect()
-        a = self.lineedit.text()
-        print(a)    
-        self.windowMetar.metar = metarInfo
-        self.windowMetar.metar.addLayout(grid)
-        self.windowMetar.mertarGrid = grid
-        self.windowMetar.setWindowTitle("Plateforme Search")
-        self.windowMetar.mertarGrid.addWidget(metarsr, 0,0,1,2)
-        self.windowMetar.mertarGrid.addWidget(self.lineedit, 0,2,1,2)
-        self.windowMetar.mertarGrid.addWidget(metarReturn, 1,1,1,2)
-        #self.windowMetar.mertarGrid.addWidget(self.metarSR(), 1,1,1,2)
-        self.windowMetar.show()
+        form.show()
+        
+        
         
     def metarSR(self):
         
-        a = aiport(self.lineedit.text()).metar()
-        print(a["metar"])
+        self.a = aiport(self.lineedit.text()).metar()
+        print(self.a)
+         
         
             
     def btn_friends(self):
@@ -292,6 +278,7 @@ file().creat_arborecence()
 app = QApplication()
 main_windows = mainWindows()
 main_windows.show()
+form = Form()
 app.exec()
 
 
