@@ -26,5 +26,5 @@ class chart_vac(airac):
        
     
 if __name__ == '__main__':
-    a = chart_vac("LFBO_APP").creatUrlShema()
+    a = chart_vac("LFBE_APP").creatUrlShema()
     print(a)

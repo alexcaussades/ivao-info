@@ -2,6 +2,8 @@ import sys
 from PySide6.QtWidgets import (QLineEdit, QPushButton, QApplication,
     QVBoxLayout, QDialog, QLabel, QGridLayout)
 
+import requests
+
 try:
     from .airport import aiport
 except:
@@ -39,7 +41,12 @@ class Form(QDialog):
         b = a.metar()
         c = a.taf()
         r = a.runways()
-               
+        
+        # add dic to information 
+        self.metar_dic = {}
+        self.metar_dic["plateform"] = self.edit.text()
+        self.metar_dic['metar'] = b
+              
         self.rules = QLabel(f"Rule: ")
         if b["rules"] == "VFR":
             self.rule = QLabel(f"{b[str('rules')]}")
@@ -69,13 +76,12 @@ class Form(QDialog):
         else:
             self.r = QLabel("No Information Runways")
         
-        self.layout.addLayout(self.grid)
-        #self.grid.addWidget(self.rules, 0,1,0,1)
-        self.grid.addWidget(self.rule, 0,1,0,1)
-        self.grid.addWidget(self.r, 0,3,0,3)
+        self.layout.addWidget(self.rule)
+        self.layout.addWidget(self.r)
         self.layout.addWidget(self.io)
         self.layout.addWidget(self.iT)
         self.layout.addWidget(self.border)
+        
         
 
 if __name__ == '__main__':

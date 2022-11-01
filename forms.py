@@ -11,7 +11,6 @@ import time
 import logging
 import os
 from module_forms.Ia.class_log.airport import aiport
-
 from module_forms.Ia.class_log.atc_serach import search_ATC
 from module_forms.Ia.class_log.class_pos import atc_pos
 from module_forms.Ia.class_log.file import file
@@ -183,7 +182,8 @@ class mainWindows(QWidget):
         webbrowser.open(url)
     
     def profil_web(self):
-        url = self.url_profile + str(self.vidAdd)
+        url_profile = "https://ivao.aero/Login.aspx?r=Member.aspx?Id="
+        url = url_profile + str(self.vidAdd)
         webbrowser.open(url)
     
     def list_sr(self, item):
@@ -248,8 +248,9 @@ class mainWindows(QWidget):
         except:
             self.revision = QLabel("")
         
+        #mettre les information airport ici !  v0.5.4
         
-        
+        self.usersId = QLabel("UserId: "+str(pos_dic["userId"]))
         self.timestamp = QLabel("Online: {0}".format(timeLog(pos_dic["timestamp"]).get_TimesTamp()))
         self.window.setWindowTitle("Information for : {0}". format(pos_dic["atis"][1]))
         self.window.grind = gridInfoSr
@@ -258,9 +259,10 @@ class mainWindows(QWidget):
         self.window.grind.addWidget(self.metar, 1,0,1,4)
         self.window.grind.addWidget(self.rwy, 2,0,1,4)
         self.window.grind.addWidget(self.timestamp, 3,0,1,3)
-        self.window.grind.addWidget(self.vac, 4,0,1,1)
-        self.window.grind.addWidget(self.profil_users, 4,1,1,1)
-        self.window.grind.addWidget(self.addfriend, 4,4,1,1)
+        #self.window.grind.addWidget(self.usersId, 4,0,1,3)
+        self.window.grind.addWidget(self.vac, 5,0,1,1)
+        self.window.grind.addWidget(self.profil_users, 5,1,1,1)
+        self.window.grind.addWidget(self.addfriend, 5,4,1,1)
         self.window.show()
     
     # revoir la function !                                    
