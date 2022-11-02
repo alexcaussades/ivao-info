@@ -18,6 +18,7 @@ const createWindow = () => {
       contextIsolation: false, //lancement dans les autres fenetre
       plugins: true,
     },
+    icon: path.join(__dirname, "assets/icons/unnamed.png"),
   });
 
   // and load the index.html of the app.
