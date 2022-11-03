@@ -64,7 +64,7 @@ fs.appendFile(pathLogs + "\\log.txt", ecriture, function (err) {
   if (err) throw err;
   console.log("Saved!");
 });
-const fileCreatetrue = "Les fichiers ont été créés";
+const fileCreatetrue = "✅ Les fichiers ont été créés avec succès ! \r\n Version:  1.0.0";
 document.getElementById("files").innerHTML = fileCreatetrue;
 
 //function qui permet d'ouvrir le dossier des logs

@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Notification } = require("electron");
 const path = require("path");
 const os = require("os");
 
@@ -27,6 +27,13 @@ const createWindow = () => {
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
 };
+
+function showNotification(NOTIFICATION_TITLE, NOTIFICATION_BODY) {
+  new Notification({
+    title: NOTIFICATION_TITLE,
+    body: NOTIFICATION_BODY,
+  }).show();
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -30,7 +30,8 @@ function ivaoDataAtcCallsingJocker(value) {
   }).then(function (response) {
     response.data.clients.atcs.forEach((atc) => {
       if (atc.callsign.includes(value)) {
-        console.log(atc.callsign);
+         let result = atc.callsign;
+          return result;
       } else {
         //sortie du console.log en 1 resultat afficher
         return;
@@ -89,9 +90,10 @@ function searchPilotByAtcArrival(value) {
   });
 }
 
+
 module.exports = {
-    ivaoDataAtcCallsing,
-    ivaoDataAtcCallsingJocker,
-    searchPilotByAtcDeparture,
-    searchPilotByAtcArrival,
+  ivaoDataAtcCallsing,
+  ivaoDataAtcCallsingJocker,
+  searchPilotByAtcDeparture,
+  searchPilotByAtcArrival,
 };
