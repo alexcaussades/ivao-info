@@ -1,0 +1,23 @@
+{
+  "2022": {
+    "10": { "month": "OCT", "day": "6" },
+    "11": { "month": "NOV", "day": "3" },
+    "12": { "month": "DEC", "day": "1" },
+    "13": { "month": "DEC", "day": "29" }
+  },
+  "2023": {
+    "01": { "month": "JAN", "day": "26" },
+    "02": { "month": "FEV", "day": "23" },
+    "03": { "month": "MAR", "day": "23" },
+    "04": { "month": "AVR", "day": "20" },
+    "05": { "month": "MAI", "day": "18" },
+    "06": { "month": "JUN", "day": "15" },
+    "07": { "month": "JUI", "day": "13" },
+    "08": { "month": "AOU", "day": "10" },
+    "09": { "month": "SEP", "day": "7" },
+    "10": { "month": "OCT", "day": "5" },
+    "11": { "month": "NOV", "day": "2" },
+    "12": { "month": "NOV", "day": "30" },
+    "13": { "month": "DEC", "day": "28" }
+  }
+}

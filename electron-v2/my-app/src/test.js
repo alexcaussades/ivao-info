@@ -23,15 +23,14 @@ document.addEventListener("submit", function () {
         if (atc.callsign.includes(value)) {
           // cretion d'un array pour stocker les données
           let result = [];
-          result.push(atc.callsign);
-          console.log(result.length);
+          result.push(atc);
           //affichage les données sur le array
           result.forEach((element) => {
-            console.log(element);
+            console.log(element.callsign);
             document.getElementById("tableauAtc").hidden = false;
             document.getElementById(
               "table-atc"
-            ).innerHTML += `<tr><td>${element}</td></tr>`;
+            ).innerHTML += `<tr><td>${element.callsign}</td><td>${element.atcSession.frequency} Mhz</td><td><button type="submit" class="btn btn-primary"><img class="text-center" src="https://api.iconify.design/ic:baseline-cell-tower.svg?color=%23ffffff"></button></td></tr>`;
           });
         }
       });

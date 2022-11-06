@@ -9,6 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
+    "update": "ncu -u && npm install",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
