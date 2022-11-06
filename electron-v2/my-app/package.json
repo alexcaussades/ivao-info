@@ -8,6 +8,9 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "make:linux": "electron-forge make --platform=linux --arch=x64 --icon=src/assets/icon.png",
+    "make:appimage": "electron-forge make --platform=linux --arch=x64 --make-options='-p never' --icon=src/assets/icon.png",
+    "make:dmg": "electron-forge make --platform=darwin --arch=x64 --make-options='-p never' --icon=src/assets/icon.png",
     "publish": "electron-forge publish",
     "update": "ncu -u",
     "lint": "echo \"No linting configured\""
