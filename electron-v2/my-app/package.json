@@ -1,18 +1,31 @@
 {
-  "name": "my-app",
-  "productName": "my-app",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "ivao-info-tracker",
+  "productName": "IVAO Info Tracker",
+  "version": "0.6.0",
+  "description": "Ivao Info Tracker is a simple app to track your flight and atc on IVAO",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "update": "ncu -u && npm install",
+    "update": "ncu -u",
     "lint": "echo \"No linting configured\""
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexcaussades/ivao-info"
+  },
+  "bugs": {
+    "url": "https://github.com/alexcaussades/ivao-info/issues"
+  },
+  "keywords": [
+    "ivao",
+    "info",
+    "tracker",
+    "electron",
+    "nodejs"
+  ],
   "author": {
     "name": "alexcaussades",
     "email": "alexcaussades@gmail.com"
