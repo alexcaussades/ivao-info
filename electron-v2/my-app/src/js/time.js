@@ -3,6 +3,8 @@ const { Notification } = require("electron");
 const os = require("os");
 //const path = require("path");
 const fs = require("fs");
+const { airac } = require("../js/airac.js");
+const package = require("../../package.json");
 
 //recupere le non de la machine
 
@@ -64,10 +66,31 @@ fs.appendFile(pathLogs + "\\log.txt", ecriture, function (err) {
   if (err) throw err;
   console.log("Saved!");
 });
-const fileCreatetrue = "✅ Les fichiers ont été créés avec succès ! \r\n Version:  1.0.0";
+const fileCreatetrue =
+  "✅ Les fichiers ont été créés avec succès ! \r\n Version:  " +
+  package.version +
+  " " +
+  package.versionName +
+  "\r\n";
 document.getElementById("files").innerHTML = fileCreatetrue;
 
+document.getElementById("result").innerHTML =
+  " AIRAC: <strong>" + airac() + "</strong>";
+document.getElementById("profil").innerHTML =
+  " Profil: <strong>Aucun </strong>";
 //function qui permet d'ouvrir le dossier des logs
 function openFolder() {
   shell.openPath(pathLogs);
+}
+
+function openFeeadback() {
+  shell.openExternal(package.bugs.url);
+}
+
+function openGithub() {
+  shell.openExternal(package.repository.url);
+}
+
+function openIvao() {
+  shell.openExternal("https://www.ivao.aero");
 }

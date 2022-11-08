@@ -4,4 +4,7 @@
 ![](https://img.shields.io/github/license/alexcaussades/ivao-info?style=for-the-badge)
 # Ivao-Info Tracker
 
-logiciel de tracker pour [IVAO](https://www.ivao.aero/)
+Logiciel de tracker pour [IVAO](https://www.ivao.aero/)
+
+
+![](./docs/img/v060_acceuil.png)

@@ -1,4 +1,3 @@
-const { ivaoDataAtcCallsingJocker } = require("./ivaofiles");
 const { dialog } = require("electron");
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
 // search atc callsign du formulaire de recherche la test.html
