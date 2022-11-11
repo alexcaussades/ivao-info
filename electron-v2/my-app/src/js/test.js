@@ -1,4 +1,9 @@
-const { dialog } = require("electron");
+const { shell, ipcRenderer } = require("electron");
+const Store = require("electron-store");
+const { Notification } = require("electron");
+const os = require("os");
+
+const store = new Store();
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
 // search atc callsign du formulaire de recherche la test.html
 
@@ -8,6 +13,9 @@ const form = document.querySelector("testing");
 document.addEventListener("DOMContentLoaded", () => {
   console.log("charegement des données");
   document.getElementById("tableauAtc").hidden = true;
+  store.set("atc", "atc");
+  store.set("pilot", "pilot");
+  console.log(store.get("atc"));
 });
 
 document.addEventListener("submit", function () {
@@ -29,7 +37,7 @@ document.addEventListener("submit", function () {
             document.getElementById("tableauAtc").hidden = false;
             document.getElementById(
               "table-atc"
-            ).innerHTML += `<tr><td>${element.callsign}</td><td>${element.atcSession.frequency} Mhz</td><td><button type="submit" class="btn btn-primary"><img class="text-center" src="https://api.iconify.design/ic:baseline-cell-tower.svg?color=%23ffffff"></button></td></tr>`;
+            ).innerHTML += `<tr><td>${element.callsign}</td><td>${element.atcSession.frequency} Mhz</td><td><form > <input name="get_plateform" type="hidden" id="plateform" value="${element.callsign}"> <button class="btn btn-primary" id="testh" type="submit"><img class="text-center" src="https://api.iconify.design/ic:baseline-cell-tower.svg?color=%23ffffff"></button></form></td></tr>`;
           });
         }
       });
