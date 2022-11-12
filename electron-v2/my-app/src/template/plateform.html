@@ -14,18 +14,31 @@
 
 <body>
     <div class="container">
-        <a href="../template/test.html"><button class="mt-2">plateform</button></a>
+        <a href="../template/test.html"><button class="btn btn-dark mt-2">Search ATC</button></a>
+        <a href="#"><button class="btn btn-primary mt-2 ms-1" disabled>Profile</button></a>
+        <a href="#"><button class="btn btn-primary mt-2 ms-1" disabled>Settings</button></a>
+        <a href="https://webeye.ivao.aero/" target="_blank"><button class="btn btn-info mt-2 ms-1">Webeye</button></a>
         <div class="row mt-2">
             <div class="col-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><span id="atis_name_airport"></span> <span id="callsign"></span></h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">ATC:</h5>
-                        <p id="callsign"></p>
-                        <p id="frequency"></p>
-                        <p id="atis_revision"></p>
-                        <p id="atis_name_airport"></p>
-                        <p id="atis_metar"></p>
-                        <p id="atis_rwy"></p>
+                        <span><strong>Frequency:</strong> <strong><span class="text-dark" id="frequency"></span>
+                            MHz</span></strong><br>
+                        <span><strong>Metar:</strong> <span id="atis_metar"></span> </span><br>
+                        <span><strong>RWY:</strong> <span id="atis_rwy"></span> </span><br>
+                        <span><strong>Information:</strong> <span id="atis_revision"></span> </span>
+                        <div class="mt-2 d-flex justify-content-center">
+                            <button class="btn btn-info ms-2" disabled>Profile</button>
+                            <button class="btn btn-primary ms-2" disabled>Chart VAC</button>
+                            <button class="btn btn-success ms-2" disabled>Add Friends</button>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span><strong>Departure: </strong> <span id="depart_count"></span> </span>
+                        <span class="float-end"><strong>Arrival: </strong> <span id="arrival_count"></span> </span>
                     </div>
                 </div>
             </div>

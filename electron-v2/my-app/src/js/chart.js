@@ -9,4 +9,4 @@ function chart(value) {
 }
 
 
-console.log(chart("LFBL"));
+module.exports = {chart};
