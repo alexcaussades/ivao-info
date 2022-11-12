@@ -1,6 +1,7 @@
-const { app, BrowserWindow, Notification } = require("electron");
+const { app, BrowserWindow, Notification, ipcRenderer, ipcMain } = require("electron");
 const path = require("path");
 const os = require("os");
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {

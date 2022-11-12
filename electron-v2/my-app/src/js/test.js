@@ -1,21 +1,18 @@
 const { shell, ipcRenderer } = require("electron");
-const Store = require("electron-store");
 const { Notification } = require("electron");
 const os = require("os");
-
-const store = new Store();
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
+
+const imgbtn =
+  "https://api.iconify.design/ic:baseline-cell-tower.svg?color=%23ffffff";
 // search atc callsign du formulaire de recherche la test.html
 
-/** recuperer le données du formulaire en reception des donées via submit */
-const form = document.querySelector("testing");
+/** création du systeme d'enregistrement de donnée de electron en variable */
+//localStorage.removeItem("plateform");
+console.log(localStorage.getItem("plateform"));
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("charegement des données");
   document.getElementById("tableauAtc").hidden = true;
-  store.set("atc", "atc");
-  store.set("pilot", "pilot");
-  console.log(store.get("atc"));
 });
 
 document.addEventListener("submit", function () {
@@ -35,11 +32,22 @@ document.addEventListener("submit", function () {
           result.forEach((element) => {
             console.log(element.callsign);
             document.getElementById("tableauAtc").hidden = false;
-            document.getElementById(
-              "table-atc"
-            ).innerHTML += `<tr><td>${element.callsign}</td><td>${element.atcSession.frequency} Mhz</td><td><form > <input name="get_plateform" type="hidden" id="plateform" value="${element.callsign}"> <button class="btn btn-primary" id="testh" type="submit"><img class="text-center" src="https://api.iconify.design/ic:baseline-cell-tower.svg?color=%23ffffff"></button></form></td></tr>`;
-          });
+            document.getElementById("table-atc").innerHTML += `<tr><td>${
+              element.callsign
+            }</td><td>${
+              element.atcSession.frequency
+            } MHz</td><td><button class="btn btn-primary" id="plateform" value="${element.callsign}">More Information</button></td></tr>`;
+          }
+          );
         }
       });
     });
+});
+
+document.addEventListener("click", function (e) {
+  if (e.target && e.target.id == "plateform") {
+    console.log(e.target.value);
+    localStorage.setItem("plateform", e.target.value);
+    window.location.href = "plateform.html";
+  }
 });
