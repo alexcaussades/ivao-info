@@ -1,7 +1,7 @@
 const { shell, ipcRenderer, pushNotifications } = require("electron");
 const { Notification } = require("electron");
 const os = require("os");
-
+const {chart} = require('../js/chart.js');
 
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
 
@@ -13,6 +13,7 @@ airport = airport.split("_");
 
 let departureId = [];
 let arrivalId = [];
+
 
 
 fetch(dataIvao)
@@ -60,3 +61,7 @@ fetch(dataIvao)
     });
   });
 
+/** onclick chatvac function ajoue de URL dans la balise a */
+document.getElementById("chartvac").addEventListener("click", function () {
+  document.getElementById("chartvaclogiciel").href = chart(airport[0]);
+});
