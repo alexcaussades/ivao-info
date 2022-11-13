@@ -78,6 +78,8 @@ document.getElementById("result").innerHTML =
   " AIRAC: <strong>" + airac() + "</strong>";
 document.getElementById("profil").innerHTML =
   " Profil: <strong>Aucun </strong>";
+
+
 //function qui permet d'ouvrir le dossier des logs
 function openFolder() {
   shell.openPath(pathLogs);

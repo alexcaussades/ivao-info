@@ -1,7 +1,16 @@
-const { app, BrowserWindow, Notification, ipcRenderer, ipcMain } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  Notification,
+  ipcRenderer,
+  ipcMain,
+} = require("electron");
 const path = require("path");
 const os = require("os");
+const { dialog } = require("electron");
 
+let win = null;
+let mainWindow = null;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -19,21 +28,15 @@ const createWindow = () => {
       contextIsolation: false, //lancement dans les autres fenetre
       plugins: true,
     },
+    darkTheme: true,
     icon: path.join(__dirname, "assets/icons/unnamed.png"),
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../template/index.html"));
-
+  
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
-};
-
-function showNotification(NOTIFICATION_TITLE, NOTIFICATION_BODY) {
-  new Notification({
-    title: NOTIFICATION_TITLE,
-    body: NOTIFICATION_BODY,
-  }).show();
 }
 
 // This method will be called when Electron has finished
@@ -58,5 +61,11 @@ app.on("activate", () => {
   }
 });
 
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+
+ipcMain.on("open-file-dialog-for-file", (event) => {
+  console.log("open-file-dialog-for-file");
+});
