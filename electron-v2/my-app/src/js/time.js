@@ -96,3 +96,10 @@ function openGithub() {
 function openIvao() {
   shell.openExternal("https://www.ivao.aero");
 }
+
+fetch("https://api.github.com/repos/alexcaussades/ivao-info/releases")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data[0]);
+  });
+
