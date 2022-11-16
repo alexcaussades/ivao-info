@@ -1,5 +1,6 @@
 const { shell, ipcRenderer } = require("electron");
 const { Notification } = require("electron");
+const {compareVid, getVid } = require("../js/friends.js");
 const os = require("os");
 const fs = require("fs");
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
@@ -43,6 +44,8 @@ if (preferencesJson.active == true) {
 } else {
   document.getElementById("warning-pfofile").hidden = false;
 }
+getVid();
+compareVid();
 
 document.addEventListener("submit", function () {
   let value = document.getElementById("search-atc").value;
