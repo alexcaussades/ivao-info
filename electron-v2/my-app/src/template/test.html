@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ivao Info</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script type="module" src="../js/test.js"></script>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <button type="submit" class="btn btn-secondary">Ivao</button>
+        <button type="submit" class="btn btn-secondary">webeye</button>
+        <button class="btn btn-secondary" id="met" data-bs-toggle="modal" data-bs-target="#metar" disabled>Metar</button>
+        <button type="submit" id="friend" class="btn btn-secondary position-relative" disabled>friends <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                3
+                <span class="visually-hidden">unread messages</span>
+            </span></button>
+        <button id="pref_plateforme" class="btn btn-secondary" disabled>LFBL</button>
+        <button id="online" class="btn btn-dark" disabled>Offline</button>
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#profile" >Profile</button>
+    </div>
+
+    <div class="container mt-2">
+        <div class="alert alert-warning" id="warning-pfofile" role="alert">
+            For creat your profile click on profile button
+        </div>
+    </div>
+
+    <div class="container mt-2">
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ATC:</h5>
+                        <form action="#" method="dialog">
+                            <div class="mb-3">
+                                <label for="" class="form-label">
+                                </label>
+                                <input type="text" class="form-control" name="" id="search-atc"
+                                    aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted">Search open plateform</small>
+                            </div>
+                            <button type="submit" id="testing" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Pilot:</h5>
+                        <form action="#" method="dialog">
+                            <div class="mb-3">
+                                <label for="" class="form-label">
+                                </label>
+                                <input type="text" class="form-control" name="" id="search-Pilot"
+                                    aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted">Search Pilot</small>
+                            </div>
+                            <button type="submit" id="testing" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-2" id="tableauAtc">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Callsign</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-atc">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+<!-- Modal -->
+
+<div class="modal fade" id="metar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search Metar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="">ICAO</label>
+                        <input type="text" name="" id="icao" class="form-control" placeholder="Search..."
+                            aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Search metar</small>
+                    </div>
+                </form>
+                <span class="mt-2" id="returnMetar"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="">VID</label>
+                        <input type="text" name="" id="vid" class="form-control" placeholder="My VID 191514"
+                            aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Your VID</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Plateform Preferency</label>
+                        <input type="text" name="" id="preference" class="form-control" placeholder="My Plateform Preferency LFBL"
+                            aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Your Preferency plateform</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Code developer</label>
+                        <input type="text" name="" id="code_dev" class="form-control" placeholder="Enter your code here... is not required"
+                            aria-describedby="helpId">
+                        <small id="helpId" class="text-muted">Is code for developer tools</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Token Metar</label>
+                        <input type="text" name="" id="token_metar" class="form-control" required placeholder="Enter your token here... is required"
+                            aria-describedby="helpId">
+                        <a target="_blank" href="https://github.com/alexcaussades/ivao-info/blob/master/docs/metar.md"><small id="helpId" class="">Documentation for Token metar</small></a>
+                    </div>
+                    <button type="submit" class="btn btn-success"> Creat my profile</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
+<!-- recuprer les donnée du formulaire en js  -->
