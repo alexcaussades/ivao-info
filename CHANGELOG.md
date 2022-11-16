@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added a new Module `friend`.
-- Added a new Module `Profil` [Documentation]("./docs/profile.md").
+- Added a new Module `Profil` [Documentation](./docs/profile.md).
 
 ### Changed
 
