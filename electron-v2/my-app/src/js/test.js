@@ -78,20 +78,23 @@ document.addEventListener("click", function (e) {
   }
 });
 
-document.getElementById("vid").setAttribute = preferencesJson.vid;
-document.getElementById("preference").innerHTML =
+document.getElementById("vid").value = preferencesJson.vid;
+document.getElementById("preference").value =
   preferencesJson.preference_platform;
-document.getElementById("code_dev").innerHTML = preferencesJson.code_dev;
+document.getElementById("code_dev").value = preferencesJson.code_dev;
+document.getElementById("token_metar").value = preferencesJson.token_metar;
 
 document.addEventListener("submit", () => {
   let vid = document.getElementById("vid").value;
   let prefrence_platform = document.getElementById("preference").value;
   let code_dev = document.getElementById("code_dev").value;
+  let token_metar = document.getElementById("token_metar").value;
   /** creation du fichier au format json des preferency  */
   const data = {
     vid: vid,
     preference_platform: prefrence_platform,
     code_dev: code_dev,
+    token_metar: token_metar,
     active: true,
   };
   const dataJson = JSON.stringify(data);
@@ -121,7 +124,7 @@ document.addEventListener("keyup", function (e) {
       /** fetch avec auth  */
       fetch("https://avwx.rest/api/metar/" + srmetar, {
         headers: {
-          Authorization: "Token x_LveP6GNrgdVJ9BxlmIUAJMOlfCMzTxNcnJC8zLgW0",
+          Authorization: "Token " + preferencesJson.token_metar,
         },
       })
         .then((response) => response.json()) // one extra step
