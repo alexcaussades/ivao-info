@@ -1,5 +1,6 @@
 const { shell, ipcRenderer } = require("electron");
 const { Notification } = require("electron");
+const {compareVid, getVid } = require("../js/friends.js");
 const os = require("os");
 const fs = require("fs");
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
@@ -43,6 +44,8 @@ if (preferencesJson.active == true) {
 } else {
   document.getElementById("warning-pfofile").hidden = false;
 }
+getVid();
+compareVid();
 
 document.addEventListener("submit", function () {
   let value = document.getElementById("search-atc").value;
@@ -50,7 +53,6 @@ document.addEventListener("submit", function () {
   fetch(dataIvao)
     .then((response) => response.json()) // one extra step
     .then((data) => {
-      console.log(data.clients.atcs);
       //rechercher les données dans le tableau atcs
       data.clients.atcs.forEach((atc) => {
         if (atc.callsign.includes(value)) {
@@ -77,6 +79,9 @@ document.addEventListener("click", function (e) {
     window.location.href = "plateform.html";
   }
 });
+
+/** preference plateform */
+document.getElementById("pref_plateforme").innerHTML = (preferencesJson.preference_platform ? preferencesJson.preference_platform : "IVAO");
 
 document.getElementById("vid").value = preferencesJson.vid;
 document.getElementById("preference").value =
@@ -159,6 +164,25 @@ setInterval(function () {
           document.getElementById("online").classList.remove("btn-dark");
           document.getElementById("online").classList.add("btn-success");
           document.getElementById("online").innerHTML = "Online";
+        }
+      });
+    });
+}, 10000);
+
+
+setInterval(function () {
+  fetch(dataIvao)
+    .then((response) => response.json())
+    .then((data) => {
+      data.clients.atcs.forEach((atc) => {
+        if (atc.callsign.includes(preferencesJson.preference_platform)) {
+          document.getElementById("pref_plateforme").classList.remove("btn-secondary");
+          document.getElementById("pref_plateforme").classList.add("btn-success");
+          document.getElementById("pref_plateforme").onclick = function () {
+            localStorage.setItem("plateform", preferencesJson.preference_platform);
+            window.location.href = "plateform.html";
+          };
+          document.getElementById("pref_plateforme").innerHTML = preferencesJson.preference_platform;
         }
       });
     });
