@@ -15,17 +15,19 @@
 
 <body>
     <div class="container mt-3">
-        <button type="submit" class="btn btn-secondary">Ivao</button>
-        <button type="submit" class="btn btn-secondary">webeye</button>
-        <button class="btn btn-secondary" id="met" data-bs-toggle="modal" data-bs-target="#metar" disabled>Metar</button>
-        <button type="submit" id="friend" class="btn btn-secondary position-relative" disabled>friends <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="friends_online">
+        <button type="submit" class="btn btn-secondary">IVAO</button>
+        <button type="submit" class="btn btn-secondary">Webeye</button>
+        <button class="btn btn-secondary" id="met" data-bs-toggle="modal" data-bs-target="#metar"
+            disabled>Metar</button>
+        <button type="submit" id="friend" class="btn btn-secondary position-relative" disabled>Friends <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                id="friends_online">
                 0
                 <span class="visually-hidden">unread messages</span>
             </span></button>
-        <button id="pref_plateforme" class="btn btn-secondary" disabled>LFBL</button>
+        <button id="pref_plateforme" class="btn btn-secondary">----</button>
         <button id="online" class="btn btn-dark" disabled>Offline</button>
-        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#profile" >Profile</button>
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#profile">Profile</button>
     </div>
 
     <div class="container mt-2">
@@ -133,21 +135,23 @@
                     </div>
                     <div class="form-group">
                         <label for="">Plateform Preferency</label>
-                        <input type="text" name="" id="preference" class="form-control" placeholder="My Plateform Preferency LFBL"
-                            aria-describedby="helpId">
+                        <input type="text" name="" id="preference" class="form-control"
+                            placeholder="My Plateform Preferency LFBL" aria-describedby="helpId">
                         <small id="helpId" class="text-muted">Your Preferency plateform</small>
                     </div>
                     <div class="form-group">
                         <label for="">Code developer</label>
-                        <input type="text" name="" id="code_dev" class="form-control" placeholder="Enter your code here... is not required"
-                            aria-describedby="helpId">
+                        <input type="text" name="" id="code_dev" class="form-control"
+                            placeholder="Enter your code here... is not required" aria-describedby="helpId">
                         <small id="helpId" class="text-muted">Is code for developer tools</small>
                     </div>
                     <div class="form-group">
                         <label for="">Token Metar</label>
-                        <input type="text" name="" id="token_metar" class="form-control" required placeholder="Enter your token here... is required"
-                            aria-describedby="helpId">
-                        <a target="_blank" href="https://github.com/alexcaussades/ivao-info/blob/master/docs/metar.md"><small id="helpId" class="">Documentation for Token metar</small></a>
+                        <input type="text" name="" id="token_metar" class="form-control" required
+                            placeholder="Enter your token here... is required" aria-describedby="helpId">
+                        <a target="_blank"
+                            href="https://github.com/alexcaussades/ivao-info/blob/master/docs/metar.md"><small
+                                id="helpId" class="">Documentation for Token metar</small></a>
                     </div>
                     <button type="submit" class="btn btn-success"> Creat my profile</button>
                 </form>
@@ -161,3 +165,4 @@
 
 </html>
 <!-- recuprer les donnée du formulaire en js  -->
+

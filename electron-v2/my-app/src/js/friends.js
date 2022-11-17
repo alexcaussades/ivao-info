@@ -50,6 +50,7 @@ function compareVid() {
         vidJson.forEach((vid) => {
           if (atc.userId == vid) {
             online_friends_atc.push(atc.callsign);
+            //console.log(atc.callsign);
             friends.push(online_friends_atc);
           }
         });
@@ -58,11 +59,13 @@ function compareVid() {
         vidJson.forEach((vid) => {
           if (pilots.userId == vid) {
             online_friends_pilots.push(pilots.callsign);
+            //console.log(pilots.callsign);
             friends.push(online_friends_pilots);
           }
         });
       });
       document.getElementById("friends_online").innerHTML = friends.length;
+      
     });
 }
 
@@ -70,3 +73,5 @@ module.exports = {
   getVid,
   compareVid,
 };
+
+//compareVid();

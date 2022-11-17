@@ -29,7 +29,7 @@ const createWindow = () => {
       plugins: true,
     },
     darkTheme: true,
-    icon: path.join(__dirname, "assets/icons/unnamed.png"),
+    icon: path.join(__dirname, "../img/icone.png"),
   });
 
   // and load the index.html of the app.

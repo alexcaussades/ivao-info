@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.5] [Alpha] - 16/11/2020
+## [0.7.0] [Alpha] - 2016-11-17
+
+### Added
+
+- Added `Search Online Friends` option to the `Friends` menu.
+- Added `Fav Plateform search Online` option to the `Plateforme` menu.
+
+## [0.6.5] [Alpha] - 2020-11-16
 
 ### Added
 
@@ -12,11 +19,3 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Changed the `README.md` file.
-
-### Removed
-
-- Empty
-
-### Fixed
-
-- Empty
