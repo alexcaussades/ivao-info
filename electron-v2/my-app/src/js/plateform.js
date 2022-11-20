@@ -3,6 +3,10 @@ const { Notification } = require("electron");
 const os = require("os");
 const { mainModule } = require("process");
 const { chart } = require("../js/chart.js");
+const Online = require("../js/class/timeOnline.js");
+const { online } = require("../js/class/timeOnline.js");
+const { rating } = require("../js/class/ratings.js");
+const Rating = require("../js/class/ratings.js");
 
 const dataIvao = "https://api.ivao.aero/v2/tracker/whazzup";
 
@@ -24,6 +28,13 @@ fetch(dataIvao)
     //recherche de l'atc dans le tableau atcs
     data.clients.atcs.forEach((atc) => {
       if (atc.callsign.includes(localStorage.getItem("plateform"))) {
+        let onlineTime = new Online(atc.createdAt);
+        document.getElementById("online").innerHTML = onlineTime.getOnline();
+        console.log(atc.rating);
+        let rating = new Rating();
+        document.getElementById("grade").innerHTML = "<img src="+rating.getRating(4, "ATC", "img")+">";
+        
+
         //affichage des données
         document.getElementById("callsign").innerHTML = atc.callsign;
         document.getElementById("atis_revision").innerHTML = atc.atis.revision;
@@ -40,23 +51,25 @@ fetch(dataIvao)
 
 setInterval(() => {
   fetch(dataIvao)
-  .then((response) => response.json()) // one extra step
-  .then((data) => {
-    //recherche de l'atc dans le tableau atcs
-    data.clients.atcs.forEach((atc) => {
-      if (atc.callsign.includes(localStorage.getItem("plateform"))) {
-        //affichage des données
-        //document.getElementById("callsign").innerHTML = atc.callsign;
-        document.getElementById("atis_revision").innerHTML = atc.atis.revision;
-        //document.getElementById("atis_name_airport").innerHTML = atc.atis.lines[1];
-        document.getElementById("atis_metar").innerHTML = atc.atis.lines[3];
-        document.getElementById("atis_rwy").innerHTML = atc.atis.lines[4];
-        //document.getElementById("frequency").innerHTML = atc.atcSession.frequency;
-        //let userId = atc.userId;
-        //console.log(userId);
-      }
+    .then((response) => response.json()) // one extra step
+    .then((data) => {
+      //recherche de l'atc dans le tableau atcs
+      data.clients.atcs.forEach((atc) => {
+        if (atc.callsign.includes(localStorage.getItem("plateform"))) {
+          //affichage des données
+          let onlineTime = new Online(atc.createdAt);
+          document.getElementById("online").innerHTML = onlineTime.getOnline();
+          document.getElementById("atis_revision").innerHTML =
+            atc.atis.revision;
+          //document.getElementById("atis_name_airport").innerHTML = atc.atis.lines[1];
+          document.getElementById("atis_metar").innerHTML = atc.atis.lines[3];
+          document.getElementById("atis_rwy").innerHTML = atc.atis.lines[4];
+          //document.getElementById("frequency").innerHTML = atc.atcSession.frequency;
+          //let userId = atc.userId;
+          //console.log(userId);
+        }
+      });
     });
-  });
 }, 10000);
 
 fetch(dataIvao)
