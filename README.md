@@ -2,6 +2,11 @@
 ![](https://img.shields.io/github/forks/alexcaussades/ivao-info?style=for-the-badge)
 ![](https://img.shields.io/github/stars/alexcaussades/ivao-info?style=for-the-badge)
 ![](https://img.shields.io/github/license/alexcaussades/ivao-info?style=for-the-badge)
+![](https://img.shields.io/badge/Build-Passed-green?style=for-the-badge)
+![](https://img.shields.io/badge/IVAO-API-green?style=for-the-badge)
+![](https://img.shields.io/badge/electron-^21.2.3-green?style=for-the-badge)
+![](https://img.shields.io/github/v/tag/alexcaussades/ivao-info?style=for-the-badge)
+![](https://img.shields.io/github/last-commit/alexcaussades/ivao-info?style=for-the-badge)
 # Ivao-Info Tracker
 
 Logiciel de tracker pour [IVAO](https://www.ivao.aero/)

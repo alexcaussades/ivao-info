@@ -1,7 +1,7 @@
 {
   "name": "ivao-info-tracker",
   "productName": "IVAO Info Tracker",
-  "version": "0.6.5",
+  "version": "0.7.1",
   "versionName": "Alpha",
   "description": "Ivao Info Tracker is a simple app to track your flight and atc on IVAO",
   "main": "src/js/index.js",
@@ -37,12 +37,12 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.1",
-    "@electron-forge/maker-deb": "^6.0.1",
-    "@electron-forge/maker-rpm": "^6.0.1",
-    "@electron-forge/maker-squirrel": "^6.0.1",
-    "@electron-forge/maker-zip": "^6.0.1",
-    "electron": "^21.2.3",
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "electron": "^22.0.0",
     "electron-builder": "^23.6.0"
   }
 }
