@@ -97,9 +97,16 @@ function openIvao() {
   shell.openExternal("https://www.ivao.aero");
 }
 
-fetch("https://api.github.com/repos/alexcaussades/ivao-info/releases")
+
+
+
+
+fetch("https://api.github.com/repos/alexcaussades/ivao-info/releases/latest")
   .then((response) => response.json())
   .then((data) => {
-    console.log(data[0]);
+    if(data.tag_name != package.version){
+      document.getElementById("update").style.display = "show";
+      document.getElementById("url_version").innerHTML = "Version: " + data.tag_name + " is redy to <a href='" + data.html_url + "'>Download</a>";
+    }
   });
 

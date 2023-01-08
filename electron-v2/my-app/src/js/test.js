@@ -23,11 +23,6 @@ const pathPrefences = path + "\\preferences";
 const preferences = fs.readFileSync(pathPrefences + "\\preferences.json");
 const preferencesJson = JSON.parse(preferences);
 
-//recupere les amis
-// const friends
-// = fs.readFileSync
-// (pathFriends + "\\friends.json");
-// const friendsJson = JSON.parse(friends);
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("tableauAtc").hidden = true;

@@ -13,9 +13,10 @@
 <body>
   <div class="container">
     <h1>IVAO INFO</h1>
-    
+
     <div class="alert alert-warning mt-2" role="alert">
-      Attention! <strong>Cette application est en cours de développement</strong>, il peut y avoir des <strong>bugs</strong>.
+      Attention! <strong>Cette application est en cours de développement</strong>, il peut y avoir des
+      <strong>bugs</strong>.
     </div>
 
     <div class="row mt-2">
@@ -25,9 +26,15 @@
             <h5 class="card-title">Informations</h5>
             <p class="card-text" id="files">
             </p>
-            <button type="button" class="btn btn-primary align-middle" id="btn-info" onclick="openFolder()"><iconify-icon class="align-middle" icon="mdi:math-log"></iconify-icon> Obtenir les informations des logs</button>
-            <button type="button" class="btn btn-warning mt-2 align-middle" id="btn-info" onclick="openFeeadback()"><iconify-icon class="align-middle" icon="fluent:person-feedback-24-filled"></iconify-icon> FeedBack</button>
-            <button type="button" class="btn btn-success mt-2 align-middle" id="btn-info" onclick="openGithub()"><iconify-icon class="align-middle" icon="bxl:github"></iconify-icon> Project</button>
+            <button type="button" class="btn btn-primary align-middle" id="btn-info"
+              onclick="openFolder()"><iconify-icon class="align-middle" icon="mdi:math-log"></iconify-icon> Obtenir les
+              informations des logs</button>
+            <button type="button" class="btn btn-warning mt-2 align-middle" id="btn-info"
+              onclick="openFeeadback()"><iconify-icon class="align-middle"
+                icon="fluent:person-feedback-24-filled"></iconify-icon> FeedBack</button>
+            <button type="button" class="btn btn-success mt-2 align-middle" id="btn-info"
+              onclick="openGithub()"><iconify-icon class="align-middle" icon="bxl:github"></iconify-icon>
+              Project</button>
           </div>
         </div>
       </div>
@@ -39,11 +46,21 @@
             <p class="card-text" id="profil"></p>
           </div>
         </div>
+      </div>
+
+      <div id="update" class="card mt-2 bg-warning">
+        <div class="card-body bg-transparent border-success">
+          <p class="card-text text-dark"><b>⚠ Update is ready</b></p>
+          <p class="card-text" id="url_version">Text</p>
+        </div>
+      </div>
+
+      <p class="text-center mt-2">
+        <a href="test.html"><button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Enter the tracker"><iconify-icon class="align-middle" icon="ion:enter-sharp" width="40"
+              height="30"></iconify-icon></button></a>
+      </p>
     </div>
-    <p class="text-center mt-2">
-      <a href="test.html"><button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Enter the tracker"><iconify-icon class="align-middle" icon="ion:enter-sharp" width="40" height="30"></iconify-icon></button></a>
-    </p>
-  </div>  
 </body>
 <script src="../js/time.js"></script>
 
